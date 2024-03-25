@@ -3,6 +3,7 @@
     import { Container, Col, Row } from '@sveltestrap/sveltestrap';
     import GuestBook from './GuestBook.svelte';
     import ServerLog from './ServerLog.svelte';
+    import Center from './Center.svelte';
 
     let guestBooks = [];
     let serverLogs = [];
@@ -62,7 +63,9 @@
             <GuestBook name={gb.user_name} message={gb.message} color={gb.color} date={gb.created_at}/>
             {/each}
         </Col>
-        <Col sm="6">2</Col>
+        <Col sm="6">
+            <Center />
+        </Col>
         <Col sm="3">
             {#each serverLogs as sl (sl.id)}
             <ServerLog title={sl.title} message={sl.message} color={sl.color} date={sl.created_at}/>
