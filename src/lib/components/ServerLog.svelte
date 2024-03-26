@@ -39,7 +39,6 @@
     <Alert 
         color={color}
         heading={title}
-        theme="dark"
     >
         <div class="date-font">{formatDate}</div>
         <div>{message}</div>

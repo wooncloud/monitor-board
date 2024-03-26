@@ -1,5 +1,14 @@
 <script>
-    import { Card } from '@sveltestrap/sveltestrap';
+    import { 
+        Card, 
+        Badge, 
+        Row, 
+        Col, 
+        CardHeader, 
+        CardBody, 
+        CardTitle, 
+        CardSubtitle 
+    } from '@sveltestrap/sveltestrap';
     let color = "success";
     let content = "";
     $:color;
@@ -18,13 +27,30 @@
         } catch (e) {
             color = 'danger';
         }
-    }, (30 * 1000));
+    }, (10 * 1000));
 </script>
 
 <style>
-    /* your styles go here */
 </style>
 
 <div>
-    <Card body inverse {color}>api 센터 핑 위젯</Card>
+    <Card>
+        <CardHeader>
+            <CardTitle>개발자센터 Health Check</CardTitle>
+        </CardHeader>
+        <CardBody>
+        <CardSubtitle lass="mt-1">flow</CardSubtitle>
+        <Row class="py-1 mb-1">
+            <Col><Badge pill {color}>운영</Badge></Col>
+            <Col><Badge pill color="secondary">릴리즈</Badge></Col>
+            <Col><Badge pill color="secondary">디벨롭</Badge></Col>
+        </Row>
+        <CardSubtitle lass="mt-1">morningmate</CardSubtitle>
+        <Row class="py-1 mb-1">
+            <Col><Badge pill color="secondary">운영</Badge></Col>
+            <Col><Badge pill color="secondary">릴리즈</Badge></Col>
+            <Col><Badge pill color="secondary">디벨롭</Badge></Col>
+        </Row>
+        </CardBody>
+    </Card>
 </div>

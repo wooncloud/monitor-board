@@ -4,6 +4,8 @@
     import { Input, Button } from '@sveltestrap/sveltestrap';
     import GuestBook from '$lib/components/GuestBook.svelte';
 
+    let name;
+    let content;
     let guestBookList = [];
     $: guestBookList;
 
@@ -16,6 +18,27 @@
     supabase.channel('guest-book-channel')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'GUEST_BOOK' }, getGuestBook)
         .subscribe();
+
+    async function insertGuestBook() {
+        const { data, error } = await supabase
+            .from('GUEST_BOOK')
+            .insert([ { user_name: name, message: content }, ]);
+        
+        if (error) {
+            alert("오류! 개발자에게 문의하세요.");
+            return;
+        } 
+
+        name = "";
+        content = "";
+    }
+
+    function keyupEvent(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            insertGuestBook();
+        }
+    }
 </script>
 
 <style>
@@ -34,10 +57,12 @@
     }
 
     .book-input-form {
-        position: absolute;
-        bottom: 1rem;
-        max-width: 600px;
-        width: calc(100vw - 32px);
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background-color: #0005;
+        padding: 1rem;
+        width: 100vw;
         display: flex;
         justify-content: space-between;
         align-items: stretch;
@@ -51,6 +76,11 @@
     }
 </style>
 
+<svelte:head>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no;" />
+    <title>글 남기기 : 플로우 모니토이</title>
+</svelte:head>
+
 <section>
     <div class="book-list">
         {#if guestBookList.length > 0}
@@ -61,11 +91,20 @@
     </div>
     <div class="book-input-form">
         <div class="book-input-wrap">
-            <Input type="text" class="rounded-0 rounded-top" placeholder="이름" />
-            <Input type="text" class="rounded-0 rounded-bottom" placeholder="내용을 입력하세요." />
+            <Input type="text" 
+                class="rounded-0 rounded-top" 
+                placeholder="이름" 
+                bind:value={name}
+            />
+            <Input type="text" 
+                class="rounded-0 rounded-bottom" 
+                placeholder="내용을 입력하세요." 
+                bind:value={content}
+                on:keyup={keyupEvent}
+            />
         </div>
         <div class="book-send-wrap">
-            <Button class="h-100 w-100" size="md">전송</Button>
+            <Button class="h-100 w-100" size="md" on:click={insertGuestBook}>전송</Button>
         </div>
     </div>
     <!-- 예시도 넣어주자 -->
