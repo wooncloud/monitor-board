@@ -1,8 +1,8 @@
 <script>
     import { supabase } from "$lib/supabase";
     import { Container, Col, Row } from '@sveltestrap/sveltestrap';
-    import GuestBook from './GuestBook.svelte';
-    import ServerLog from './ServerLog.svelte';
+    import GuestBook from '$lib/components/GuestBook.svelte';
+    import ServerLog from '$lib/components/ServerLog.svelte';
     import Center from './Center.svelte';
 
     let guestBooks = [];
@@ -55,6 +55,10 @@
 <style>
     
 </style>
+
+<svelte:head>
+	<title>플로우 모니토이</title>
+</svelte:head>
 
 <Container fluid>
     <Row>

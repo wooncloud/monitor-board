@@ -26,4 +26,19 @@ function elapsedTime(date) {
     return '방금 전';
 }
 
-export {elapsedTime}
+async function selectGuestBook(supabase) {
+  let { data: GUEST_BOOK, error } = await supabase
+      .from('GUEST_BOOK')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(10);
+
+  if (error) {
+      console.error(error);
+      return;
+  }
+
+  return GUEST_BOOK;
+}
+
+export {elapsedTime, selectGuestBook}
