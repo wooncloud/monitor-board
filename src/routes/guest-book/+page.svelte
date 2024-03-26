@@ -27,14 +27,17 @@
     }
 
     .book-list {
-        height: calc(100% - 90px);
-        background-color: #fff1;
+        height: 100%;
+        /* background-color: #fff1; */
         margin-bottom: 14px;
         overflow: hidden auto;
     }
 
     .book-input-form {
-        width: 100%;
+        position: absolute;
+        bottom: 1rem;
+        max-width: 600px;
+        width: calc(100vw - 32px);
         display: flex;
         justify-content: space-between;
         align-items: stretch;
@@ -58,8 +61,8 @@
     </div>
     <div class="book-input-form">
         <div class="book-input-wrap">
-            <Input type="text" placeholder="이름" />
-            <Input type="text" placeholder="내용을 입력하세요." />
+            <Input type="text" class="rounded-0 rounded-top" placeholder="이름" />
+            <Input type="text" class="rounded-0 rounded-bottom" placeholder="내용을 입력하세요." />
         </div>
         <div class="book-send-wrap">
             <Button class="h-100 w-100" size="md">전송</Button>

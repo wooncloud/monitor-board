@@ -15,7 +15,7 @@
             .from('GUEST_BOOK')
             .select('*')
             .order('created_at', { ascending: false })
-            .limit(10);
+            .limit(20);
 
         if (error) {
             console.error(error);
@@ -30,7 +30,7 @@
             .from('SERVER_LOG')
             .select('*')
             .order('created_at', { ascending: false })
-            .limit(10);
+            .limit(20);
           
         if (error) {
             console.error(error);
