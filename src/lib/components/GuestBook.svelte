@@ -25,7 +25,6 @@
     <Alert 
         color={color}
         heading={name}
-        theme="dark"
     >
         <div>{message}</div>
         <div class="time-font">{relativeTime}</div>
