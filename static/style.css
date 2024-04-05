@@ -1,8 +1,6 @@
 body {
-    background: transparent;
-    /* background: linear-gradient(0deg, #2a0031 0%, #5b0154 100%); */
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+	background: transparent;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
 }
-

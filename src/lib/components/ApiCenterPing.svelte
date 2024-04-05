@@ -1,37 +1,60 @@
 <script>
-    import { 
-        Card, 
-        Badge, 
-        Row, 
-        Col, 
-        CardHeader, 
-        CardBody, 
-        CardTitle, 
-        CardSubtitle 
-    } from '@sveltestrap/sveltestrap';
-    let color = "success";
-    let content = "";
-    $:color;
-    $:content;
+	import {} from '@sveltestrap/sveltestrap';
+	let color = 'success';
+	let animateClass = '';
+	$: color;
+	$: animateClass;
 
-    setInterval(async() => {
-        try {
-            const resp = await fetch("https://api.flow.team/v1/test/ping");
-            const {response} = await resp.json();
-            if (response.success) {
-                color = "success";
-            } else {
-                color = 'danger';
-            }
-        } catch (e) {
-            color = 'danger';
-        }
-    }, (10 * 1000));
+	setInterval(async () => {
+		try {
+			animateClass = '';
+			const resp = await fetch('https://api.flow.team/v1/test/ping');
+			const { response } = await resp.json();
+			animateClass = 'animate';
+			if (response.success) {
+				color = 'green';
+			} else {
+				color = 'red';
+			}
+		} catch (e) {
+			color = 'red';
+		}
+	}, 10 * 1000);
 </script>
 
-<style>
-</style>
-
 <div>
-    <Card body inverse {color}>api 센터 핑 위젯</Card>
+	<div class="circle {color} {animateClass}"></div>
 </div>
+
+<style>
+	.circle {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+	}
+
+	.green {
+		background-color: #15bd66;
+	}
+
+	.red {
+		background-color: #bd1515;
+	}
+
+	@keyframes fadeInOut {
+		from {
+			opacity: 0.5;
+			transform: scale(0.75);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	.animate {
+		animation-name: fadeInOut;
+		animation-duration: 0.5s;
+		animation-fill-mode: forwards;
+	}
+</style>
