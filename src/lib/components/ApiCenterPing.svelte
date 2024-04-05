@@ -10,7 +10,12 @@
 	setInterval(async () => {
 		try {
 			animateClass = '';
-			const resp = await fetch(url);
+			const resp = await fetch(url, {
+				headers: {
+					"x-flow-passthrough": "true",
+					"x-flow-skip-logging": "true",
+				}
+			});
 			const { response } = await resp.json();
 			animateClass = 'animate';
 			if (response.success) {
