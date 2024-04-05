@@ -9,7 +9,6 @@
         try {
             const resp = await fetch("https://api.flow.team/v1/test/ping");
             const {response} = await resp.json();
-            // console.log(response);
             if (response.success) {
                 color = "success";
             } else {
@@ -26,5 +25,6 @@
 </style>
 
 <div>
+    
     <Card body inverse {color}>api 센터 핑 위젯</Card>
 </div>
