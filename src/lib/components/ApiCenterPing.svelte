@@ -1,6 +1,8 @@
 <script>
 	import {} from '@sveltestrap/sveltestrap';
-	let color = 'success';
+	export let content = "";
+	export let url = "";
+	let color = 'yellow';
 	let animateClass = '';
 	$: color;
 	$: animateClass;
@@ -8,7 +10,7 @@
 	setInterval(async () => {
 		try {
 			animateClass = '';
-			const resp = await fetch('https://api.flow.team/v1/test/ping');
+			const resp = await fetch(url);
 			const { response } = await resp.json();
 			animateClass = 'animate';
 			if (response.success) {
@@ -22,15 +24,27 @@
 	}, 10 * 1000);
 </script>
 
-<div>
-	<div class="circle {color} {animateClass}"></div>
+<div class="health-check-wrap">
+	<span class="d-flex p-3 align-items-center bg-dark border border-dark-subtle rounded-pill">
+		<div class="circle {color} {animateClass}"></div>
+		<h2 class="fw-bold text-light px-3 m-0">{content}</h2>
+	</span>
 </div>
 
 <style>
+	.health-check-wrap {
+		display: flex;
+	}
+
 	.circle {
-		width: 100px;
-		height: 100px;
+		width: 50px;
+		height: 50px;
 		border-radius: 50%;
+		border: 5px solid white;
+	}
+
+	.yellow {
+		background-color: yellow;
 	}
 
 	.green {
@@ -43,8 +57,8 @@
 
 	@keyframes fadeInOut {
 		from {
-			opacity: 0.5;
-			transform: scale(0.75);
+			opacity: 0;
+			transform: scale(0.25);
 		}
 		to {
 			opacity: 1;
